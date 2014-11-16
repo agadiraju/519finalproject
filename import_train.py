@@ -19,15 +19,24 @@ def import_training_file(filename, discrete=False):
   data = genfromtxt(filename, delimiter=',', )
   data = data[1:]  # remove header row
   orig_n, orig_d = data.shape
-  feature_matrix = np.zeros(shape=(orig_n, orig_d - 4))
+  feature_matrix = np.zeros(shape=(orig_n, orig_d - 3))
   label_matrix = np.zeros(shape=(orig_n, 1))
   
+  current_hour = 0
   for idx, row in enumerate(data):
+    if current_hour == 24:
+      current_hour = 0
+
     label = row[-1]
     no_label = row[:-3]  # remove label and corresponding counts
-    feature_matrix[idx] = no_label[1:]  # remove leading hour time
+    no_label[0] = current_hour  # quick hack to get hour time info
+    current_hour += 1
+
     if discrete:
-      feature_matrix[idx] = np.floor(feature_matrix[idx])
+      feature_matrix[idx] = np.floor(no_label)
+    else:
+      feature_matrix[idx] = no_label
+
     label_matrix[idx] = label
 
   return (feature_matrix, np.ravel(label_matrix))
