@@ -19,12 +19,12 @@ def import_training_file(filename, discrete=False):
   data = genfromtxt(filename, delimiter=',', )
   data = data[1:]  # remove header row
   orig_n, orig_d = data.shape
-  feature_matrix = np.zeros(shape=(orig_n, orig_d - 2))
+  feature_matrix = np.zeros(shape=(orig_n, orig_d - 4))
   label_matrix = np.zeros(shape=(orig_n, 1))
   
   for idx, row in enumerate(data):
     label = row[-1]
-    no_label = row[:-1]  # remove label
+    no_label = row[:-3]  # remove label and corresponding counts
     feature_matrix[idx] = no_label[1:]  # remove leading hour time
     if discrete:
       feature_matrix[idx] = np.floor(feature_matrix[idx])
