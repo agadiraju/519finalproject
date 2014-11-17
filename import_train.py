@@ -21,7 +21,14 @@ def import_training_file(filename, discrete=False):
   orig_n, orig_d = data.shape
   feature_matrix = np.zeros(shape=(orig_n, orig_d - 3))
   label_matrix = np.zeros(shape=(orig_n, 1))
-  
+  n,d = feature_matrix.shape
+
+  idx = np.arange(n)
+  np.random.seed(42)
+  np.random.shuffle(idx)
+  feature_matrix = feature_matrix[idx]
+  label_matrix = label_matrix[idx]
+
   current_hour = 0
   for idx, row in enumerate(data):
     if current_hour == 24:
