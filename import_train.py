@@ -46,6 +46,12 @@ def import_training_file(filename, discrete=False):
 
     label_matrix[idx] = label
 
+  idx = np.arange(n)
+  np.random.seed(42)
+  np.random.shuffle(idx)
+  feature_matrix = feature_matrix[idx]
+  label_matrix = label_matrix[idx]
+
   return (feature_matrix, np.ravel(label_matrix))
 
 if __name__ == '__main__':
