@@ -16,13 +16,18 @@ RMSLE naiveBayes = 2.16326900532
 
 # Decision Trees (with no max depth)
 ## Adaboost
-My score is actually higher than regular. It is 1.25045194287.
+### iter = 500
+It is 1.25045194287.
+### iter = 100
+1.26517399599
 ## Regular
 My score is the second lowest: 1.32651746013
 ## Random Forest Classifier
-My score for this is 1.57700124534
+### iter = 100
+My score for this is 1.29524349847
 ## Extra Trees Classifier
-Score is 1.44060340336
+### iter = 100
+Score is 1.3031444301
 
 # Logistic Regression
 ## Results from trying different penalties
