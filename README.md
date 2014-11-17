@@ -10,6 +10,11 @@ from 0 to 997. It's too broad of a classification to make.
 # SVMs
 * RMSLE sigmoid =  3.99758669678
 * RMSLE linear =  2.85748622823
+* RMSLE linear with C=5 = 2.55072279164
+* RMSLE linear with C=5 and loss=l1 and penalty=l2 = 1.9382315027
+* RMSLE linear with C=10 =  1.50648948479
+* RMSLE linear with C=100 = 2.31095759634
+* RMSLE linear with C=1000 = 1.98174353979
 * RMSLE rbf =  3.87239506429
 * RMSLE rbf with C=5 gamma=0.0001 = 3.48305326784
 
