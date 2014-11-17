@@ -1,10 +1,20 @@
 519finalproject
 ===============
 
+#Naive Bayes and Neural Networks
+
 So far I tried Naive Bayes and Neural Networks. They both fail for the same reason -- the # of bikes taken out can be anywhere
 from 0 to 997. It's too broad of a classification to make.
 
-# Decision Trees
+=======
+RMSLE sigmoid =  3.99758669678
+RMSLE linear =  2.85748622823
+RMSLE rbf =  3.87239506429
+RMSLE naiveBayes = 2.16326900532
+
+=======
+
+# Decision Trees (with no max depth)
 ## Adaboost
 My score is actually higher than regular. It is 1.25045194287.
 ## Regular
@@ -39,4 +49,5 @@ L2 Penalty with C=10000.0
 
 ## No penalty with CE-5
 * 2.70629841642
+
 
