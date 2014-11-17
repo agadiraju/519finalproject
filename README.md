@@ -27,25 +27,25 @@ Score is 1.44060340336
 # Logistic Regression
 ## Results from trying different penalties
 * L1 Penalty with C=10.0
-2.60695415935
+  * 2.60695415935
 * L2 Penalty with C=10.0
-2.6547980647
+  * 2.6547980647
 * L1 Penalty with C=100.0
-2.57870120062
+  * 2.57870120062
 * L2 Penalty with C=100.0
-2.585980683
+  * 2.585980683
 * L1 Penalty with C=1000.0
-2.53797970939
+  * 2.53797970939
 * L2 Penalty with C=1000.0
-2.61280057305
-L1 Penalty with C=10000.0
-* 2.56804227912
-L2 Penalty with C=10000.0
-* 2.57051736226
+  * 2.61280057305
+* L1 Penalty with C=10000.0
+  * 2.56804227912
+* L2 Penalty with C=10000.0
+  * 2.57051736226
 * L1 Penalty with C=100000.0
-2.55627986963
+  * 2.55627986963
 * L2 Penalty with C=100000.0
-2.59808068079
+  * 2.59808068079
 
 ## No penalty with CE-5
 * 2.70629841642
