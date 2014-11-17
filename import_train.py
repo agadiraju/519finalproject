@@ -41,5 +41,5 @@ def import_training_file(filename, discrete=False):
 
   return (feature_matrix, np.ravel(label_matrix))
 
-# if __name__ == '__main__':
-#   import_training_file(sys.argv[1])
+if __name__ == '__main__':
+  import_training_file(sys.argv[1])
