@@ -19,6 +19,15 @@ from 0 to 997. It's too broad of a classification to make.
 * RMSLE rbf with C=5 gamma=0.0001 = 3.48305326784
 
 =======
+#Nearest Neighbors (kd_tree)
+* RMSLE nearest neighbors with neighbors=5  =  1.30106865675
+* RMSLE nearest neighbors with neighbors=7  =  1.30981933469
+* RMSLE nearest neighbors with neighbors=8  =  1.31414497154
+* RMSLE nearest neighbors with neighbors=10  =  1.3192726732
+* RMSLE nearest neighbors with neighbors=5, leaf=70  =  1.29803419224
+* RMSLE nearest neighbors with neighbors=5, leaf=70, p=1  =  1.27996796419
+
+=======
 RMSLE naiveBayes = 2.16326900532
 
 =======
