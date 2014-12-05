@@ -10,9 +10,14 @@ def rmsle(trainy, predicty):
   metric = 0
   n = len(trainy)
   for idx in xrange(n):
-    y_train = trainy[idx]
-    y_predict = predicty[idx]
+    y_train = trainy[idx] + .0001
+    y_predict = predicty[idx] + .0001
 
+    if y_predict <= 0:
+      y_predict = .0001
+    # print y_predict
+    # print y_train
+    # raw_input()
     metric += ((math.log(y_predict) - math.log(y_train)) ** 2)
 
   return math.sqrt(float(1.0/n) * metric)

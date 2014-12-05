@@ -34,11 +34,11 @@ if __name__ == '__main__':
 	Xtest = X[nTrain:,:]
 	ytest = y[nTrain:]
 	
-	neighbors = 5
+	neighbors = 6
 	#linear
 	#param_grid = {'C': [1, 5, 10, 100],}
 	#clf = GridSearchCV(SVC(kernel='linear'), param_grid,n_jobs=-1)
-	neigh = KNeighborsRegressor(n_neighbors=neighbors,algorithm='kd_tree',leaf_size=80,p=1)
+	neigh = KNeighborsRegressor(n_neighbors=neighbors,algorithm='kd_tree',leaf_size=70,p=1)
 	neigh.fit(Xtrain,ytrain)
 	pred = neigh.predict(Xtest)
 	#print "best estimator = ",clf.best_estimator_

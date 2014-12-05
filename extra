@@ -1,0 +1,18 @@
+print "test accuracy score = ",metrics.accuracy_score(ytest, pred)
+print "test precision score = ",metrics.precision_score(ytest,pred)
+print "test recall score = ",metrics.recall_score(ytest,pred)
+print "train time = ", (t2 - t1)
+print "test time = ", (t3-t2)
+
+filePath = "train.csv"
+file = open(filePath,'r')
+X = np.genfromtxt(filePath, delimiter=',')
+
+filePath = "y_count.csv"
+file = open(filePath,'r')
+y = np.genfromtxt(filePath, delimiter=',')
+
+
+RMSLE sigmoid =  3.99758669678
+RMSLE linear =  2.85748622823
+RMSLE rbf =  3.87239506429

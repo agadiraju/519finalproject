@@ -20,15 +20,15 @@ if __name__ == '__main__':
 	#idx = np.arange(n)
 	#np.random.seed(42)
 	#np.random.shuffle(idx)
-	#X = X[idx]
 	#y = y[idx]
+	#X = X[idx]
 
 	# split the data
 	Xtrain = X[:nTrain,:]
 	ytrain = y[:nTrain]
 	Xtest = X[nTrain:,:]
 	ytest = y[nTrain:]
-
+	
 	#linear
 	clf = SVC(kernel='linear')
 	clf.fit(Xtrain,ytrain)
@@ -46,7 +46,6 @@ if __name__ == '__main__':
 	clf.fit(Xtrain,ytrain)
 	pred = clf.predict(Xtest)
 	print "RMSE rbf = ", rmsle(ytest, pred)
-
 
 	#sigmoid
 	clf = SVC(kernel='sigmoid')

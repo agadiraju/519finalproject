@@ -19,6 +19,14 @@ from 0 to 997. It's too broad of a classification to make.
 * RMSLE rbf with C=5 = 1.50591263209
 
 =======
+# SVMs with updated training file
+* RMSLE sigmoid = 1.51505901557
+* RMSLE linear =  2.66486578715
+* RMSLE poly = 
+* RMSLE rbf = 1.43826321753
+* RMSLE rbf with C=5 = 
+
+=======
 #Nearest Neighbors (kd_tree)
 * RMSLE nearest neighbors with neighbors=5  =  1.30106865675
 * RMSLE nearest neighbors with neighbors=7  =  1.30981933469
