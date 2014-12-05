@@ -70,7 +70,7 @@ def decision_tree(X, y1, y2, y3):
   grad_casual = clf_3.predict(Xtest)
   rf_casual = clf_4.predict(Xtest)
   et_casual = clf_5.predict(Xtest)
-
+  feature_imps = clf_4.feature_importances_
 
   print "regular decision tree"
   print rmsle(ytest, dt_regular + dt_casual)
@@ -82,6 +82,9 @@ def decision_tree(X, y1, y2, y3):
   print rmsle(ytest, rf_regular + rf_casual)
   print "extra trees classifier"
   print rmsle(ytest, et_casual + et_regular)
+
+  print "feature importances"
+  print feature_imps
 
 if __name__ == '__main__':
   (X,y1,y2,y3) = import_training_file(sys.argv[1], True)
