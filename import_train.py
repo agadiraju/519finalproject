@@ -1,8 +1,10 @@
+import csv
 import sys
 import math
 import numpy as np
+import dateutil.parser as dateparser
 
-from numpy import genfromtxt
+from sklearn.feature_extraction import DictVectorizer
 
 def rmsle(trainy, predicty):
   metric = 0
@@ -16,42 +18,84 @@ def rmsle(trainy, predicty):
   return math.sqrt(float(1.0/n) * metric)
 
 def import_training_file(filename, discrete=False):
-  data = genfromtxt(filename, delimiter=',', )
-  data = data[1:]  # remove header row
+  # data = genfromtxt(filename, delimiter=',', )
+
+  reader = csv.DictReader(open(filename, 'rU'), delimiter=',')
+  #reader.next()
+  data = []
+  factorize_fields = ['season', 'holiday', 'workingday', 'weather']
+  counter = 0
+  for row in reader:
+    current_feature_dict = {}
+    for f in reader.fieldnames:
+      # parse out month
+      if f == 'day':
+        continue
+      if f == 'datetime':  
+        month = dateparser.parse(row[f]).month
+        hour = dateparser.parse(row[f]).hour
+        current_feature_dict['month'] = month
+        current_feature_dict['hour'] = hour
+      elif f not in factorize_fields:
+        #print row[f]
+        current_feature_dict[f] = float(row[f])
+      else:
+        current_feature_dict[f] = row[f]
+
+    data.append(current_feature_dict)
+
+  vec = DictVectorizer()
+  jumble = vec.fit_transform(data).toarray()  # this messes up ordering....
+  feature_names = vec.get_feature_names()
+
+  # correct the ordering
+  correct_order = ['month', 'hour', 'Sat?', 'Sun?', 'Mon?', 'Tue?', 'Wed?', 'Thu?', 'Fri?', 'season=1',
+                   'season=2', 'season=3', 'season=4', 'holiday=0', 'holiday=1', 'workingday=0', 
+                   'workingday=1', 'weather=1', 'weather=2', 'weather=3', 'weather=4', 'temp', 'atemp',
+                   'humidity', 'windspeed', 'casual', 'registered', 'count']
+  data = []
+
+  for entry in jumble:
+    #current_feature = []
+    entry_dict = dict(zip(feature_names, entry))
+    current_feature = [entry_dict[k] for k in correct_order]
+    data.append(current_feature)
+
+  data = np.array(data)
+
   orig_n, orig_d = data.shape
   feature_matrix = np.zeros(shape=(orig_n, orig_d - 3))
-  label_matrix = np.zeros(shape=(orig_n, 1))
+  total_matrix = np.zeros(shape=(orig_n, 1))
+  registered_matrix = np.zeros(shape=(orig_n, 1))
+  casual_matrix = np.zeros(shape=(orig_n, 1))
   n,d = feature_matrix.shape
 
-  current_hour = 0
   for idx, row in enumerate(data):
-    if current_hour == 24:
-      current_hour = 0
 
-    label = row[-1]
+    total = row[-1]
+    registered = row[-2]
+    casual = row[-3]
+
     no_label = row[:-3]  # remove label and corresponding counts
-    no_label[0] = current_hour  # quick hack to get hour time info
-    current_hour += 1
 
     if discrete:
-      feature_matrix[idx] = np.floor(no_label)
+      feature_matrix[idx] = np.rint(no_label)
     else:
       feature_matrix[idx] = no_label
 
-    label_matrix[idx] = label
-  idx = np.arange(n)
-  np.random.seed(42)
-  np.random.shuffle(idx)
-  feature_matrix = feature_matrix[idx]
-  label_matrix = label_matrix[idx]
+    total_matrix[idx] = total
+    registered_matrix[idx] = registered
+    casual_matrix[idx] = casual
 
   idx = np.arange(n)
   np.random.seed(42)
   np.random.shuffle(idx)
   feature_matrix = feature_matrix[idx]
-  label_matrix = label_matrix[idx]
+  total_matrix = total_matrix[idx]
+  registered_matrix = registered_matrix[idx]
+  casual_matrix = casual_matrix[idx]
 
-  return (feature_matrix, np.ravel(label_matrix))
+  return (feature_matrix, np.ravel(total_matrix), np.ravel(registered_matrix), np.ravel(casual_matrix))
 
 if __name__ == '__main__':
-  import_training_file(sys.argv[1])
+  print import_training_file(sys.argv[1])

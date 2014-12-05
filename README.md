@@ -7,9 +7,27 @@ So far I tried Naive Bayes and Neural Networks. They both fail for the same reas
 from 0 to 997. It's too broad of a classification to make.
 
 =======
-RMSLE sigmoid =  3.99758669678
-RMSLE linear =  2.85748622823
-RMSLE rbf =  3.87239506429
+# SVMs
+* RMSLE sigmoid =  3.99758669678
+* RMSLE linear =  2.85748622823
+* RMSLE linear with C=5 = 2.55072279164
+* RMSLE linear with C=5 and loss=l1 and penalty=l2 = 1.9382315027
+* RMSLE linear with C=10 =  1.50648948479
+* RMSLE linear with C=100 = 2.31095759634
+* RMSLE linear with C=1000 = 1.98174353979
+* RMSLE rbf =  3.87239506429
+* RMSLE rbf with C=5 gamma=0.0001 = 3.48305326784
+
+=======
+#Nearest Neighbors (kd_tree)
+* RMSLE nearest neighbors with neighbors=5  =  1.30106865675
+* RMSLE nearest neighbors with neighbors=7  =  1.30981933469
+* RMSLE nearest neighbors with neighbors=8  =  1.31414497154
+* RMSLE nearest neighbors with neighbors=10  =  1.3192726732
+* RMSLE nearest neighbors with neighbors=5, leaf=70  =  1.29803419224
+* RMSLE nearest neighbors with neighbors=5, leaf=70, p=1  =  1.27996796419
+
+=======
 RMSLE naiveBayes = 2.16326900532
 
 =======
@@ -57,4 +75,5 @@ Score is 1.09986335589
 ## No penalty with CE-5
 * 2.70629841642
 
-
+# Status Report
+* https://www.sharelatex.com/project/54696d64345fe9cb1f7046de
