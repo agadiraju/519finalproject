@@ -4,7 +4,7 @@ import sys
 
 from import_train import import_training_file
 from import_train import rmsle
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LinearRegression
 
 
 def logistic_regression(X, y):
@@ -32,11 +32,12 @@ def logistic_regression(X, y):
     #L2 penalty
     print rmsle(ytest, y2)
 
-# logreg = LogisticRegression(C=1e5)
-# logreg.fit(Xtrain, ytrain)
-# y3 = logreg.predict(Xtest)
-# print "no penalty, C=" + str(1e5)
-# print rmsle(ytest,y3)
+  logreg = LinearRegression()
+  logreg.fit(Xtrain, ytrain)
+  y3 = logreg.predict(Xtest)
+  print "Linear Regression"
+  print y3
+  print rmsle(ytest,y3)
 
 
 
