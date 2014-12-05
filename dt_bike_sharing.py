@@ -5,10 +5,10 @@ import sys
 from import_train import import_training_file
 from import_train import rmsle
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import AdaBoostRegressor
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import ExtraTreesRegressor
 
 def decision_tree(X, y):
   n, _ = X.shape
@@ -21,12 +21,12 @@ def decision_tree(X, y):
   clf_1 = DecisionTreeRegressor(max_depth=None)
   clf_2 = AdaBoostRegressor(DecisionTreeRegressor(max_depth=None),
                           n_estimators=500)
-  clf_4 = RandomForestClassifier(n_estimators=10, max_depth=None,
+  clf_4 = RandomForestRegressor(n_estimators=500, max_depth=None,
                           min_samples_split=1, random_state=0)
-  clf_5 = ExtraTreesClassifier(n_estimators=10, max_depth=None,
+  clf_5 = ExtraTreesRegressor(n_estimators=500, max_depth=None,
                           min_samples_split=1, random_state=0)
-  clf_3 = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0,
-                          max_depth=1, random_state=0)
+  clf_3 = GradientBoostingRegressor(n_estimators=500,
+                          max_depth=None, random_state=0)
 
   print "finished generating tree"
 
@@ -56,7 +56,6 @@ def decision_tree(X, y):
   print rmsle(ytest, y4)
   print "extra trees classifier"
   print rmsle(ytest, y5)
-
 
 if __name__ == '__main__':
   (X, y) = import_training_file(sys.argv[1], True)
