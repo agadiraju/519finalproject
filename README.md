@@ -24,10 +24,12 @@ It is 1.25045194287.
 My score is the second lowest: 1.32651746013
 ## Random Forest Classifier
 ### iter = 100
-My score for this is 1.29524349847
+My score for this is 1.13790775751
+## Gradient Tree Boosting
+My score for this is 1.30120410415
 ## Extra Trees Classifier
 ### iter = 100
-Score is 1.3031444301
+Score is 1.09986335589
 
 # Logistic Regression
 ## Results from trying different penalties
