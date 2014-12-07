@@ -1,6 +1,5 @@
 import csv
 import sys
-import matplotlib.pyplot as plt
 import math
 import numpy as np
 import dateutil.parser as dateparser
@@ -22,25 +21,6 @@ def rmsle(trainy, predicty):
     metric += ((math.log(y_predict) - math.log(y_train)) ** 2)
 
   return math.sqrt(float(1.0/n) * metric)
-
-def plot_ride_heatmap(filename):
-  reader = csv.DictReader(open(filename, 'rU'), delimiter = ',')
-  ride_data = np.zeros(shape = (7, 24))  # days x hours
-
-  for row in reader:
-    hour = dateparser.parse(row['datetime']).hour
-    day = int(row['day']) - 1
-    total_rides = float(row['count'])
-    ride_data[day][hour] += total_rides
-
-  day_labels = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-  plt.pcolor(ride_data,cmap=plt.cm.Blues,edgecolors='k')
-  plt.xticks(np.arange(0, 24))
-  plt.yticks(np.arange(0, 7) + 0.5, day_labels)
-  plt.xlabel('Hour')
-  plt.ylabel('Day of the Week')
-  plt.title('Heatmap of Bike Rides At Specific Hours')
-  plt.show()
 
 def import_training_file(filename, discrete=False):
   # data = genfromtxt(filename, delimiter=',', )
@@ -123,5 +103,4 @@ def import_training_file(filename, discrete=False):
   return (feature_matrix, np.ravel(total_matrix), np.ravel(registered_matrix), np.ravel(casual_matrix))
 
 if __name__ == '__main__':
-  #print import_training_file(sys.argv[1])
-  plot_ride_heatmap(sys.argv[1])
+  print import_training_file(sys.argv[1])
