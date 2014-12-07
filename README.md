@@ -37,6 +37,10 @@ from 0 to 997. It's too broad of a classification to make.
 * RMSLE nearest neighbors with neighbors=6, leaf=100, p=1  =  1.27920350061
 
 =======
+#Nearest Neighbors (kd_tree) with updated training file
+* RMSLE nearest neighbors with neighbors=4  =  0.989827747648
+
+=======
 RMSLE naiveBayes = 2.16326900532
 
 =======
