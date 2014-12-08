@@ -32,7 +32,7 @@ def decision_tree(X, y1, y2, y3):
   clf_4 = RandomForestRegressor(bootstrap=True, compute_importances=None,
            criterion='mse', max_depth=None, max_features='auto',
            min_density=None, min_samples_leaf=2, min_samples_split=2,
-           n_estimators=1000, n_jobs=1, oob_score=True, random_state=None,
+           n_estimators=2000, n_jobs=1, oob_score=True, random_state=None,
            verbose=0)
   #clf_5 = ExtraTreesRegressor(n_estimators=500, max_depth=None,
                           #min_samples_split=1, random_state=0)
