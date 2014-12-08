@@ -123,5 +123,5 @@ def import_training_file(filename, discrete=False):
   return (feature_matrix, np.ravel(total_matrix), np.ravel(registered_matrix), np.ravel(casual_matrix))
 
 if __name__ == '__main__':
-  #print import_training_file(sys.argv[1])
-  plot_ride_heatmap(sys.argv[1])
+  print import_training_file(sys.argv[1])
+  #plot_ride_heatmap(sys.argv[1])
