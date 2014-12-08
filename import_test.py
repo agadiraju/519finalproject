@@ -89,8 +89,9 @@ def create_submission(datetime, y_total_pred):
       temp_dict = {'datetime' : datetime[idx], 'count' : np.rint(y_total_pred[idx])}
       writer.writerow(temp_dict)
 
-def plot_residuals(pred, given):
-  plt.scatter(pred, pred - given, c='b', s=40, alpha=0.25, label='Training Residuals')
+def plot_residuals(train_pred, train_given, test_pred, test_given):
+  plt.scatter(test_pred, test_pred - test_given, c='g', s=40, alpha=0.8, label='Testing Residuals')
+  plt.scatter(train_pred, train_pred - train_given, c='b', s=40, alpha=0.25, label='Training Residuals')
   plt.plot([0,600],[0,0], c='r')
   plt.xlim(0,600)
   plt.legend()
@@ -102,25 +103,40 @@ def plot_residuals(pred, given):
 if __name__ == '__main__':
   X_train, y_total, y_reg, y_casual = import_training_file(sys.argv[1])
   X_test, datetime = import_testing_file(sys.argv[2])
+
+  n, _ = X_train.shape
+  nTrain = int(0.5*n)  #training on 50% of the data
+  sub_Xtrain = X_train[:nTrain,:]
+  sub_ytrain = y_total[:nTrain]
+  sub_ytrain_registered = y_reg[:nTrain]
+  sub_ytest_registered = y_reg[nTrain:]
+  sub_ytrain_casual = y_casual[:nTrain]
+  sub_ytest_casual = y_casual[nTrain:]
+  sub_Xtest = X_train[nTrain:,:]
+  sub_ytest = y_total[nTrain:]
+
   rf_opt = RandomForestRegressor(bootstrap=True, compute_importances=None,
            criterion='mse', max_depth=None, max_features='auto',
            min_density=None, min_samples_leaf=2, min_samples_split=2,
            n_estimators=1000, n_jobs=1, oob_score=True, random_state=None,
            verbose=0)
 
-  rf_opt.fit(X_train, y_reg)
-  y_reg_pred = rf_opt.predict(X_test)
+  # rf_opt.fit(X_train, y_reg)
+  # y_reg_pred = rf_opt.predict(X_test)
 
-  rf_opt.fit(X_train, y_casual)
-  y_casual_pred = rf_opt.predict(X_test)
+  # rf_opt.fit(X_train, y_casual)
+  # y_casual_pred = rf_opt.predict(X_test)
 
-  y_test_pred = y_reg_pred + y_casual_pred
+  # y_test_pred = y_reg_pred + y_casual_pred
 
-  rf_opt.fit(X_train, y_total)
-  y_train_pred = rf_opt.predict(X_train)
+  rf_opt.fit(sub_Xtrain, sub_ytrain)
+  sub_y_train_pred = rf_opt.predict(sub_Xtrain)
   #print y_total_pred
+
+  rf_opt.fit(sub_Xtrain, sub_ytrain)
+  sub_y_test_pred = rf_opt.predict(sub_Xtest)
 
   # Write to output file
   # create_submission(datetime, y_test_pred)
-  plot_residuals(y_train_pred, y_total)
+  plot_residuals(sub_y_train_pred, sub_ytrain, sub_y_test_pred, sub_ytest)
 
